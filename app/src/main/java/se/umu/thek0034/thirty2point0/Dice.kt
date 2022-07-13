@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 
+//This class stores all information that a dice has: face, isMarked, isThrowable, isRed, isVisible
 class Dice (private val diceNo : Int) : Parcelable {
 
     private var face: Int = 0
@@ -42,7 +43,7 @@ class Dice (private val diceNo : Int) : Parcelable {
         return this.marked
     }
 
-    fun setFace(face: Int) {
+    private fun setFace(face: Int) {
         this.face = face
     }
 
@@ -50,7 +51,7 @@ class Dice (private val diceNo : Int) : Parcelable {
         return this.diceNo
     }
 
-    fun setThrowable(throwable: Boolean, imageButton : ImageButton) {
+    fun setThrowable(throwable: Boolean) {
         this.throwable = throwable
     }
 
@@ -85,6 +86,7 @@ class Dice (private val diceNo : Int) : Parcelable {
     }
 
     fun throwDice(imageButton : ImageButton) {
+        imageButton.isEnabled = true
         if (!this.marked) {
             face = (1..6).random()
             setWhite(imageButton)
@@ -93,10 +95,22 @@ class Dice (private val diceNo : Int) : Parcelable {
 
     fun resetDiceForNewTurn(imageButton : ImageButton){
         this.marked = false
-        this.throwable = false
-        setFace(0)
+        this.throwable = true
+        setFace(diceNo + 1)
+        imageButton.isEnabled = false
         imageButton.visibility = View.VISIBLE
         setWhite(imageButton)
+    }
+
+    fun setImageOfDiceForCombination(imageView: ImageView){
+        when (face) {
+            1 -> imageView.setImageResource(R.drawable.small1)
+            2 -> imageView.setImageResource(R.drawable.small2)
+            3 -> imageView.setImageResource(R.drawable.small3)
+            4 -> imageView.setImageResource(R.drawable.small4)
+            5 -> imageView.setImageResource(R.drawable.small5)
+            6 -> imageView.setImageResource(R.drawable.small6)
+        }
     }
 
     private fun setWhite(imageButton: ImageButton) {
@@ -161,4 +175,5 @@ class Dice (private val diceNo : Int) : Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }
