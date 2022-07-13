@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var allOptionButtons: List<RadioButton>
     private lateinit var combinationsLayout: LinearLayout
     private var allCombinationsArray = arrayOfNulls<Array<Dice?>>(6)
+    private var allDiceArray = arrayOfNulls<Dice>(6)
 
     private var roundInt: Int = 1
     private val roundIntKey = "se.umu.thek0034.umu_thirty2point0.roundInt"
@@ -51,28 +52,19 @@ class MainActivity : AppCompatActivity() {
     private val allPointsArrayKey = "se.umu.thek0034.umu_thirty2point0.allPointsArray"
     private var areAllOptionsUsed = BooleanArray(10)
     private val areAllOptionsUsedKey = "se.umu.thek0034.umu_thirty2point0.isAllOptionUsed"
-    private var allDiceArray = arrayOfNulls<Dice>(6)
-    private val allDiceArrayKey = "se.umu.thek0034.umu_thirty2point0.allDiceArray"
-    private var combinationOneArray = arrayOfNulls<Dice>(6)
-    private val combinationOneArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationOneArray"
-    private var combinationTwoArray = arrayOfNulls<Dice>(6)
-    private val combinationTwoArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationTwoArray"
-    private var combinationThreeArray = arrayOfNulls<Dice>(6)
-    private val combinationThreeArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationThreeArray"
-    private var combinationFourArray = arrayOfNulls<Dice>(6)
-    private val combinationFourArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationFourArray"
-    private var combinationFiveArray = arrayOfNulls<Dice>(6)
-    private val combinationFiveArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationFiveArray"
-    private var combinationSixArray = arrayOfNulls<Dice>(6)
-    private val combinationSixArrayKey = "se.umu.thek0034.umu_thirty2point0.combinationSixArray"
 
     private var diceOne = Dice(0)
     private val diceOneKey = "se.umu.thek0034.umu_thirty2point0.diceOne"
     private var diceTwo = Dice(1)
+    private val diceTwoKey = "se.umu.thek0034.umu_thirty2point0.diceTwo"
     private var diceThree = Dice(2)
+    private val diceThreeKey = "se.umu.thek0034.umu_thirty2point0.diceThree"
     private var diceFour = Dice(3)
+    private val diceFourKey = "se.umu.thek0034.umu_thirty2point0.diceFour"
     private var diceFive = Dice(4)
+    private val diceFiveKey = "se.umu.thek0034.umu_thirty2point0.diceFive"
     private var diceSix = Dice(5)
+    private val diceSixKey = "se.umu.thek0034.umu_thirty2point0.diceSix"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,18 +79,16 @@ class MainActivity : AppCompatActivity() {
         } else {
             roundInt = savedInstanceState.getInt(roundIntKey)
             throwsLeftInt = savedInstanceState.getInt(throwsLeftKey)
-//            allDiceArray = savedInstanceState.getParcelableArray(allDiceArrayKey) as Array<Dice?>
             isInCombinationStage = savedInstanceState.getBoolean(isInCombinationStageKey)
             totalSumInt = savedInstanceState.getInt(totalSumIntKey)
             isOptionRadioGroupOpen = savedInstanceState.getBoolean(isOptionRadioGroupOpenKey)
             currentOptionIndex = savedInstanceState.getInt(currentOptionIndexKey)
             diceOne = savedInstanceState.getParcelable(diceOneKey)!!
-//            combinationOneArray = savedInstanceState.getParcelableArray(combinationOneArrayKey) as Array<Dice?>
-//            combinationTwoArray = savedInstanceState.getParcelableArray(combinationTwoArrayKey) as Array<Dice?>
-//            combinationThreeArray = savedInstanceState.getParcelableArray(combinationThreeArrayKey) as Array<Dice?>
-//            combinationFourArray = savedInstanceState.getParcelableArray(combinationFourArrayKey) as Array<Dice?>
-//            combinationFiveArray = savedInstanceState.getParcelableArray(combinationFiveArrayKey) as Array<Dice?>
-//            combinationSixArray = savedInstanceState.getParcelableArray(combinationSixArrayKey) as Array<Dice?>
+            diceTwo = savedInstanceState.getParcelable(diceTwoKey)!!
+            diceThree = savedInstanceState.getParcelable(diceThreeKey)!!
+            diceFour = savedInstanceState.getParcelable(diceFourKey)!!
+            diceFive = savedInstanceState.getParcelable(diceFiveKey)!!
+            diceSix = savedInstanceState.getParcelable(diceSixKey)!!
             allPointsArray = savedInstanceState.getIntArray(allPointsArrayKey)!!
             areAllOptionsUsed = savedInstanceState.getBooleanArray(areAllOptionsUsedKey)!!
 
@@ -106,8 +96,6 @@ class MainActivity : AppCompatActivity() {
         }
         //This checks if the objects in the allDiceArray are null. If they are, 6 Dice objects are created and added to the allDiceArray.
         setArrayOfDice()
-        //This puts the six combination arrays (Array<Dice>) declared above into an array
-        setArrayOfCombinations()
         //This includes all methods that handles the setOnClickListener methods.
         events()
     }
@@ -117,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         updateThrowsLeftText()
         updateTapTheDiceText()
         updateTotalSumText()
+        //TODO: Fixa detta
 //        for(dice in allDiceArray){
 //            val diceButton = allDiceButtons[dice!!.getDiceNo()]
 //            dice.setMarked(dice.isMarked(), diceButton)
@@ -146,15 +135,6 @@ class MainActivity : AppCompatActivity() {
                 val text = allOptionButtons[currentOptionIndex].text
                 optionButton.text = text
             }
-    }
-
-    private fun setArrayOfCombinations() {
-        allCombinationsArray[0] = combinationOneArray
-        allCombinationsArray[1] = combinationTwoArray
-        allCombinationsArray[2] = combinationThreeArray
-        allCombinationsArray[3] = combinationFourArray
-        allCombinationsArray[4] = combinationFiveArray
-        allCombinationsArray[5] = combinationSixArray
     }
 
     private fun events() {
@@ -592,11 +572,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setArrayOfDice() {
-        if (allDiceArray[1] == null) {
-            for (i in 0..5) {
-                allDiceArray[i] = Dice(i)
-            }
-        }
+        allDiceArray[0] = diceOne
+        allDiceArray[1] = diceTwo
+        allDiceArray[2] = diceThree
+        allDiceArray[3] = diceFour
+        allDiceArray[4] = diceFive
+        allDiceArray[5] = diceSix
+
     }
 
     private fun findAllViewsByID() {
@@ -646,19 +628,17 @@ class MainActivity : AppCompatActivity() {
 
         outState.putInt(roundIntKey, roundInt)
         outState.putInt(throwsLeftKey, throwsLeftInt)
-//        outState.putParcelableArray(allDiceArrayKey, allDiceArray)
         outState.putBoolean(isInCombinationStageKey, isInCombinationStage)
         outState.putInt(totalSumIntKey, totalSumInt)
         outState.putInt(currentOptionIndexKey, currentOptionIndex)
         outState.putBoolean(isOptionRadioGroupOpenKey, isOptionRadioGroupOpen)
-//        outState.putParcelableArray(combinationOneArrayKey, combinationOneArray)
-//        outState.putParcelableArray(combinationTwoArrayKey, combinationTwoArray)
-//        outState.putParcelableArray(combinationThreeArrayKey, combinationThreeArray)
-//        outState.putParcelableArray(combinationFourArrayKey, combinationFourArray)
-//        outState.putParcelableArray(combinationFiveArrayKey, combinationFiveArray)
-//        outState.putParcelableArray(combinationSixArrayKey, combinationSixArray)
         outState.putIntArray(allPointsArrayKey, allPointsArray)
         outState.putBooleanArray(areAllOptionsUsedKey, getWhichOptionsThatHaveBeenUsed())
         outState.putParcelable(diceOneKey, diceOne)
+        outState.putParcelable(diceTwoKey, diceTwo)
+        outState.putParcelable(diceThreeKey, diceThree)
+        outState.putParcelable(diceFourKey, diceFour)
+        outState.putParcelable(diceFiveKey, diceFive)
+        outState.putParcelable(diceSixKey, diceSix)
     }
 }

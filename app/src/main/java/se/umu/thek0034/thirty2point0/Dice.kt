@@ -14,6 +14,7 @@ class Dice (private val diceNo : Int) : Parcelable {
     private var throwable: Boolean = true
     private var red: Boolean = false
     private var visible: Boolean = true
+    private var combinationNumber: Int = 0
 
     constructor(parcel: Parcel) : this(parcel.readInt()) {
         face = parcel.readInt()
@@ -21,6 +22,7 @@ class Dice (private val diceNo : Int) : Parcelable {
         throwable = parcel.readByte() != 0.toByte()
         red = parcel.readByte() != 0.toByte()
         visible = parcel.readByte() != 0.toByte()
+        combinationNumber = parcel.readInt()
     }
 
     fun isRed():Boolean{
@@ -160,6 +162,7 @@ class Dice (private val diceNo : Int) : Parcelable {
         parcel.writeByte(if (throwable) 1 else 0)
         parcel.writeByte(if (red) 1 else 0)
         parcel.writeByte(if (visible) 1 else 0)
+        parcel.writeInt(combinationNumber)
     }
 
     override fun describeContents(): Int {
