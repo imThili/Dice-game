@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 
-//This class stores all information that a dice has: face, isMarked, isThrowable, isRed, isVisible
+//This class stores information of a dice: face, isMarked, isThrowable, isRed, isVisible
 class Dice (private val diceNo : Int) : Parcelable {
 
     private var face: Int = 0
@@ -23,6 +23,13 @@ class Dice (private val diceNo : Int) : Parcelable {
         red = parcel.readByte() != 0.toByte()
         visible = parcel.readByte() != 0.toByte()
         combinationNumber = parcel.readInt()
+    }
+
+    fun getCombinationNumber():Int{
+        return combinationNumber
+    }
+    fun setCombinationNumber(combinationNumber :Int){
+        this.combinationNumber = combinationNumber
     }
 
     fun isRed():Boolean{
@@ -43,10 +50,6 @@ class Dice (private val diceNo : Int) : Parcelable {
 
     fun isMarked(): Boolean {
         return this.marked
-    }
-
-    private fun setFace(face: Int) {
-        this.face = face
     }
 
     fun getDiceNo() : Int{
@@ -98,10 +101,12 @@ class Dice (private val diceNo : Int) : Parcelable {
     fun resetDiceForNewTurn(imageButton : ImageButton){
         this.marked = false
         this.throwable = true
-        setFace(diceNo + 1)
+        this.visible = true
+        this.face = (diceNo + 1)
         imageButton.isEnabled = false
         imageButton.visibility = View.VISIBLE
         setWhite(imageButton)
+        this.combinationNumber = 0
     }
 
     fun setImageOfDiceForCombination(imageView: ImageView){
@@ -149,10 +154,6 @@ class Dice (private val diceNo : Int) : Parcelable {
             6 -> imageButton.setImageResource(R.drawable.red6)
         }
         red = true
-    }
-
-    override fun toString(): String {
-        return "Dice: $diceNo, Face: $face"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

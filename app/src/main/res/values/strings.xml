@@ -30,4 +30,6 @@
     <string name="fourth_dice">this is the fourth dice</string>
     <string name="fifth_dice">this is the fifth dice</string>
     <string name="sixth_dice">this is the sixth dice</string>
+    
+    <string name="play_again">Play again</string>
 </resources>
