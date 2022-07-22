@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             //This sets the correct view depending on the state of the variables, such as visibility of objects, text on buttons, etc.
             setCorrectViewWithSavedInstanceStateVariables()
         }
-        //This includes all methods that handles the setOnClickListener methods (except for the button that removes a combination)
+        //This includes all methods that handles the setOnClickListener methods (except for the button that removes a combination). See next method.
         events()
     }
 
@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //This recreates the combinations a user has made from the attribute "combinationNumber" the dice have.
+    //This recreates the combinations a user has made from the attribute "combinationNumber" that the dice have.
     private fun createCombinationsFromDiceCombinationNumbers() {
         val mutableLists = mutableListOf<MutableList<Dice>>(
             mutableListOf(),
@@ -488,6 +488,7 @@ class MainActivity : AppCompatActivity() {
             updateThrowsLeftText()
             updateTotalSumText()
             updateTapTheDiceText()
+            continueButton.text = keepAll
             continueButton.text = keepAll
             updateRoundText()
             setInvisibilitiesOnNewGame()

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 private const val extraAllPointsArray = "se.umu.thek0034.umu_thirty_test.extraAllPointsArray"
@@ -73,6 +74,14 @@ class ResultActivity : AppCompatActivity() {
                 putExtra(extraAllPointsArray, allPointsArray)
             }
         }
+    }
+
+    //When the user presses the back button, this will show a toast that says the user can't. And nothing will happen.
+    override fun onBackPressed() {
+        Toast.makeText(
+            this, "No cheating, you can't go back in this game!", Toast.LENGTH_SHORT
+        )
+            .show()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
