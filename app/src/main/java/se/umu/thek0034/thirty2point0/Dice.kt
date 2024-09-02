@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 
-//This class stores information of a dice: face, isMarked, isThrowable, isRed, isVisible
 class Dice (private val diceNo : Int) : Parcelable {
 
     private var face: Int = 0
