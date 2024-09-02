@@ -2,7 +2,7 @@
 An android app game named Thirty where you have 10 turns to make a maximum of 30 throws.
 
 ## How to Play
-Thirty is quite similar to Yatzy. Each turn you can throw five dice three times. After each throw, you'll choose which dice to keep. The rest will be rerolled during the next throw.  
+Thirty is quite similar to Yatzy. Each turn you can throw five dice three times. After each throw, you'll choose which dice to keep, and the rest will be rerolled during the next throw.  
 
 ![start_page](https://github.com/imThili/Dice-game/assets/93258938/40d75438-c261-4e30-abf7-a6ab6c339e71)
 ![save](https://github.com/imThili/Dice-game/assets/93258938/5f0959f0-3115-482a-bbe4-99b6283765b4)  
